@@ -1,0 +1,9 @@
+fastmcp==1.0
+python-dotenv
+mcp
+arxiv
+ipython
+google-generativeai
+nest_asyncio
+uv
+
