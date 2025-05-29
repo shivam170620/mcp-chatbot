@@ -17,7 +17,7 @@ dependencies = [
 ]
 [project.scripts]
 research-server = "research_server:main"
-weather-server = "mcp_chatbot.weather_server:mcp.run"
+weather-server = "weather_server:main" 
 mcp-chatbot = "main:run"
 
 [build-system]
