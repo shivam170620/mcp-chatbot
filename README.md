@@ -11,22 +11,51 @@ We are building mcp server with high level implementation using FastMCP
 
 # launching server 
 
-You're launching research_server.py using uv run (possibly via VS Code or terminal), and your environment sets up transports (communication channels) like stdio and web socket for real-time communication/debugging. The session ID is used to track this execution session.
+## Weather server 
 
---> New connection
-Query parameters: [Object: null prototype] {
-  command: 'uv',
-  args: 'run research_server.py',
-  env: '{"HOME":"/Users/shivamkumar","LOGNAME":"shivamkumar","PATH":"/Users/shivamkumar/.npm/_npx/5a9d879542beca3a/node_modules/.bin:/Users/shivamkumar/Documents/GEN AI/mcp-chatbot/node_modules/.bin:/Users/shivamkumar/Documents/GEN AI/node_modules/.bin:/Users/shivamkumar/Documents/node_modules/.bin:/Users/shivamkumar/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/Users/shivamkumar/Documents/GEN AI/mcp-chatbot/.venv/bin:/Users/shivamkumar/.vscode/extensions/ms-python.python-2025.6.1-darwin-arm64/python_files/deactivate/zsh:/Users/shivamkumar/.pyenv/versions/3.11.4/bin:/Users/shivamkumar/.vscode/extensions/ms-python.python-2025.6.1-darwin-arm64/python_files/deactivate/zsh:/Users/shivamkumar/.pyenv/versions/3.11.4/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/shivamkumar/.vscode/extensions/ms-python.python-2025.6.1-darwin-arm64/python_files/deactivate/zsh:/Users/shivamkumar/.pyenv/versions/3.11.4/bin:/opt/anaconda3/bin:/opt/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin","SHELL":"/bin/zsh","TERM":"xterm-256color","USER":"shivamkumar"}',
-  transportType: 'stdio'
+{
+    "mcpServers": {
+        "weather_server": {
+            "command": "uvx",
+             "args": ["--from", "git+https://github.com/shivam170620/mcp-chatbot.git", "mcp-chatbot"],
+            "env": {
+                "ACCUWEATHER_API_KEY": "your_api_key_here"
+            }
+        }
+    }
 }
-Stdio transport: command=/Users/shivamkumar/.pyenv/versions/3.11.4/bin/uv, args=run,research_server.py
-Spawned stdio transport
-Connected MCP client to backing server transport
-Created web app transport
-Set up MCP proxy
-Received message for sessionId b60cf4a7-48ff-4541-af5b-5e87714bfa8f
-Received message for sessionId b60cf4a7-48ff-4541-af5b-5e87714bfa8f
+
+
+## Research server 
+
+{
+    "mcpServers": {
+        "research_server": {
+            "command": "uvx",
+            "args": ["--from", "git+https://github.com/shivam170620/mcp-chatbot.git", "mcp-chatbot"],
+            
+        }
+    }
+}
+
+
+## Postgres mcp server (running through docker running on 5432 port with database name as "postgres" ) 
+
+- eg -> postgresql://postgres:YourPassword123@host.docker.internal:5432/postgres
+
+"mcpServers": {
+      "postgres": {
+        "command": "docker",
+        "args": [
+          "run", 
+          "-i", 
+          "--rm", 
+          "mcp/postgres", 
+          "postgresql://{postgres_username}:{postgres_password}@host.docker.internal:5432/{postgres_databasename}"]
+      }
+}
+
+
 
 # MCP Architecture 
 
@@ -38,4 +67,5 @@ Connecting the mcp chatbot ( client ) to mcp servers where we have tools.
 
 # Connecting the mcp chatbot to reference servers 
 
-# Admding prompt and resource features 
+
+
