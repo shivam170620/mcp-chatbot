@@ -6,4 +6,5 @@ ipython
 google-generativeai
 nest_asyncio
 uv
+aiohttp
 
