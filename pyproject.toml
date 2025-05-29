@@ -1,0 +1,26 @@
+[project]
+name = "mcp-chatbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.12.4",
+    "arxiv>=2.2.0",
+    "fastmcp>=2.5.1",
+    "google-generativeai>=0.8.5",
+    "ipython>=9.2.0",
+    "mcp>=1.9.0",
+    "nest-asyncio>=1.6.0",
+    "python-dotenv>=1.1.0",
+    "uvicorn>=0.34.2",
+]
+[project.scripts]
+research-server = "research_server:main"
+weather-server = "mcp_chatbot.weather_server:mcp.run"
+mcp-chatbot = "main:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+

@@ -2,8 +2,8 @@ import arxiv
 import os
 import json
 from typing import List, Dict, Optional
-from mcp.server.fastmcp import FastMCP
-from IPython.display import IFrame
+from fastmcp import FastMCP
+
 
 # Configuration
 PAPER_DIR = "papers"
@@ -227,38 +227,13 @@ def get_paper_summary(paper_id: str) -> str:
     except Exception as e:
         return f"Error retrieving summary: {str(e)}"
 
-if __name__ == "__main__":
+
+def main():
     print("Starting ArXiv Research MCP Server...")
-    
-    # Get base URL from environment
-    base_url = os.environ.get('DLAI_LOCAL_URL', 'http://localhost:{port}')
-    
-    # Display terminal interface
-    terminal_url = base_url.format(port=8888) + "terminals/1"
-    print(f"Terminal available at: {terminal_url}")
-    IFrame(terminal_url, width=600, height=768)
-    
-    # Inspector URLs to try
-    inspector_urls = [
-        base_url.format(port=3001),
-        base_url.format(port=8888) + "inspector",
-        "http://localhost:3001"
-    ]
-    
-    print("\nInspector might be available at:")
-    for url in inspector_urls:
-        print(f"  - {url}")
-    
-    print("\nServer tools available:")
-    print("  - search_papers(topic, max_results=5)")
-    print("  - extract_info(paper_id)")
-    print("  - list_saved_papers(topic=None)")
-    print("  - get_paper_summary(paper_id)")
-    
-    # Run the MCP server with inspector enabled
     try:
-        mcp.run(transport='stdio', inspector=True)
+        mcp.run(transport='stdio')
     except Exception as e:
         print(f"Error running server: {e}")
-        # Fallback without inspector
-        mcp.run(transport='stdio')
+
+if __name__ == "__main__":
+    main()

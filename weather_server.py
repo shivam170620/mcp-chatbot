@@ -5,6 +5,7 @@ from typing import Dict, Optional
 from fastmcp import FastMCP
 from dotenv import load_dotenv
 from aiohttp import ClientSession
+import asyncio
 
 # Load environment variables
 load_dotenv()
@@ -128,3 +129,14 @@ async def get_hourly_weather(location: str) -> Dict:
             "current_conditions": current_data,
             "hourly_forecast": hourly_data
         } 
+
+# Add this at the end of your weather server file:
+def main():
+    print("Starting Weather MCP Server...")
+    try:
+        mcp.run(transport='stdio')
+    except Exception as e:
+        print(f"Error running server: {e}")
+
+if __name__ == "__main__":
+    main()
