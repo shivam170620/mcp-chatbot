@@ -5,7 +5,6 @@ from typing import Dict, Optional
 from fastmcp import FastMCP
 from dotenv import load_dotenv
 from aiohttp import ClientSession
-import uvicorn
 
 # Load environment variables
 load_dotenv()
@@ -129,6 +128,3 @@ async def get_hourly_weather(location: str) -> Dict:
             "current_conditions": current_data,
             "hourly_forecast": hourly_data
         } 
-
-if __name__ == "__main__":
-    uvicorn.run("weather_server:app", host="0.0.0.0", port=5004, reload=True)
